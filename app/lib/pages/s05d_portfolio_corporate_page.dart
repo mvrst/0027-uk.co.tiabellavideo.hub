@@ -43,7 +43,7 @@ class S05dPortfolioCorporatePage extends StatelessWidget {
             ),
           ),
           _chips(context),
-          const Expanded(child: _Grid(items: PortfolioData.corporate)),
+          Expanded(child: _Grid(items: PortfolioData.corporate)),
         ],
       ),
       bottomNavigationBar: BottomPillTabs(currentIndex: BottomPillTabs.indexForPath(loc)),

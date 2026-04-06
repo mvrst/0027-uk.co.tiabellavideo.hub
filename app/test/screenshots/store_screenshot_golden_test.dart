@@ -1,3 +1,4 @@
+@Tags(['store-screenshots', 'store_listing'])
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hub/router/route_paths.dart';
 
@@ -6,6 +7,7 @@ import 'store_screenshot_harness.dart';
 /// Play Store PNG generation via widget goldens (`flutter test ... --update-goldens`).
 ///
 /// Run subset: `flutter test test/screenshots/store_screenshot_golden_test.dart --tags store-screenshots`
+/// Tag `store_listing`: excluded in release CI (`flutter test --exclude-tags store_listing`).
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -120,5 +122,5 @@ void main() {
         matchesGoldenFile('goldens/store_08_portfolio_preview.png'),
       );
     });
-  }, tags: ['store-screenshots']);
+  });
 }

@@ -43,7 +43,7 @@ class S05bPortfolioProductionPage extends StatelessWidget {
             ),
           ),
           _chips(context),
-          const Expanded(
+          Expanded(
             child: _PortfolioGrid(items: PortfolioData.production),
           ),
         ],

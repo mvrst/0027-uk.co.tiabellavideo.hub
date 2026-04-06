@@ -43,7 +43,7 @@ class S05cPortfolioPostPage extends StatelessWidget {
             ),
           ),
           _chips(context),
-          const Expanded(child: _Grid(items: PortfolioData.postProduction)),
+          Expanded(child: _Grid(items: PortfolioData.postProduction)),
         ],
       ),
       bottomNavigationBar: BottomPillTabs(currentIndex: BottomPillTabs.indexForPath(loc)),

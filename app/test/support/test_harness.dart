@@ -59,6 +59,6 @@ Future<void> pumpHubFrames(WidgetTester tester) async {
 /// Lets microtasks from `runExternal` / `launchUrl` complete without idling all animations.
 Future<void> pumpAsyncGap(WidgetTester tester) async {
   await tester.pump();
-  await tester.pump(const Duration.zero);
+  await tester.pump();
   await tester.pump(const Duration(milliseconds: 32));
 }
