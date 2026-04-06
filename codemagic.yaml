@@ -25,6 +25,75 @@ workflows:
     artifacts:
       - app/test/screenshots/goldens/**/*.png
 
+  qa_apk:
+    name: qa_apk
+    instance_type: mac_mini_m2
+    max_build_duration: 45
+    environment:
+      flutter: stable
+      android_signing:
+        - 0027_upload
+    scripts:
+      - name: QA context, write and verify Android local.properties
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          echo "=== qa_apk context ==="
+          echo "current_branch: $(git rev-parse --abbrev-ref HEAD)"
+          echo "current_commit: $(git rev-parse HEAD)"
+          echo "working_directory_repo_root: $ROOT"
+          FLUTTER_BIN="$(command -v flutter)"
+          test -n "$FLUTTER_BIN"
+          test -x "$FLUTTER_BIN" || test -f "$FLUTTER_BIN"
+          FLUTTER_ROOT="$(dirname "$(dirname "$FLUTTER_BIN")")"
+          test -f "$FLUTTER_ROOT/bin/flutter"
+          SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          test -n "$SDK"
+          LP="$ROOT/app/android/local.properties"
+          printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$SDK" "$FLUTTER_ROOT" > "$LP"
+          echo "wrote: $LP"
+          echo "--- local.properties ---"
+          cat "$LP"
+          echo "--- end local.properties ---"
+          FP="$(grep '^flutter.sdk=' "$LP" | cut -d= -f2-)"
+          test -n "$FP"
+          test -d "$FP"
+          test -f "$FP/bin/flutter"
+          echo "verified flutter.sdk directory and bin/flutter: $FP"
+      - name: Flutter pub get
+        script: |
+          set -e
+          cd app
+          flutter pub get
+      - name: Gradle assembleRelease (APK, not AAB)
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          cd app/android
+          chmod +x ./gradlew
+          echo "exact_build_command: $(pwd)/./gradlew assembleRelease --no-daemon --stacktrace"
+          ./gradlew assembleRelease --no-daemon --stacktrace
+      - name: Verify APK output and fail if missing
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          APK_DIR="$ROOT/app/build/app/outputs/flutter-apk"
+          echo "expected_apk_directory: $APK_DIR"
+          shopt -s nullglob
+          apks=( "$APK_DIR"/*.apk )
+          if [ "${#apks[@]}" -eq 0 ]; then
+            echo "ERROR: No APK found under $APK_DIR" >&2
+            echo "Searching for any .apk under app/build (debug listing):" >&2
+            find "$ROOT/app/build" -name '*.apk' -print 2>/dev/null || true
+            exit 1
+          fi
+          for a in "${apks[@]}"; do
+            ls -la "$a"
+            echo "produced_apk_path: $a"
+          done
+    artifacts:
+      - app/build/app/outputs/flutter-apk/*.apk
+
   closed_release:
     name: closed_release
     instance_type: mac_mini_m2
