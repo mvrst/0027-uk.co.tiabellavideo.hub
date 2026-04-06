@@ -1,23 +1,152 @@
-# Codemagic — Tiabella Production Hub (uk.co.tiabellavideo.hub)
-# Repository: 0027-uk.co.tiabellavideo.hub
+# Codemagic — 0027-uk.co.tiabellavideo.hub (uk.co.tiabellavideo.hub)
+# Flutter project root: app/
+#
+# Manual-first: start builds from the Codemagic UI (or API). All workflows use
+# mac_mini_m2 (see docs/codemagic_setup.md).
 
 workflows:
   store_screenshots:
     name: store_screenshots
-    instance_type: linux
+    instance_type: mac_mini_m2
     max_build_duration: 45
     environment:
       flutter: stable
     scripts:
-      - name: Install dependencies
+      - name: Flutter pub get
         script: |
           set -e
           cd app
           flutter pub get
-      - name: Generate Play Store PNGs (widget goldens)
+      - name: Generate Play Store PNGs (widget goldens, no flutter drive)
         script: |
           set -e
           cd app
           flutter test test/screenshots/store_screenshot_golden_test.dart --update-goldens --tags store-screenshots
     artifacts:
       - app/test/screenshots/goldens/**/*.png
+
+  closed_release:
+    name: closed_release
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      android_signing:
+        - 0027_upload
+    scripts:
+      - name: Write Android local.properties
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          FLUTTER_BIN="$(command -v flutter)"
+          FLUTTER_ROOT="$(dirname "$(dirname "$FLUTTER_BIN")")"
+          SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          test -n "$SDK"
+          printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$SDK" "$FLUTTER_ROOT" > "$ROOT/app/android/local.properties"
+      - name: Flutter pub get
+        script: |
+          set -e
+          cd app
+          flutter pub get
+      - name: Flutter tests (exclude store listing goldens)
+        script: |
+          set -e
+          cd app
+          flutter test --exclude-tags store_listing
+      - name: Gradle bundleRelease (no flutter build appbundle)
+        script: |
+          set -e
+          cd app/android
+          chmod +x gradlew
+          ./gradlew bundleRelease --no-daemon --stacktrace
+      - name: Verify AAB output path
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          ls -la "$ROOT/app/build/app/outputs/bundle/release/"*.aab
+    artifacts:
+      - app/build/app/outputs/bundle/release/*.aab
+
+  open_release:
+    name: open_release
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      android_signing:
+        - 0027_upload
+    scripts:
+      - name: Write Android local.properties
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          FLUTTER_BIN="$(command -v flutter)"
+          FLUTTER_ROOT="$(dirname "$(dirname "$FLUTTER_BIN")")"
+          SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          test -n "$SDK"
+          printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$SDK" "$FLUTTER_ROOT" > "$ROOT/app/android/local.properties"
+      - name: Flutter pub get
+        script: |
+          set -e
+          cd app
+          flutter pub get
+      - name: Flutter tests (exclude store listing goldens)
+        script: |
+          set -e
+          cd app
+          flutter test --exclude-tags store_listing
+      - name: Gradle bundleRelease (no flutter build appbundle)
+        script: |
+          set -e
+          cd app/android
+          chmod +x gradlew
+          ./gradlew bundleRelease --no-daemon --stacktrace
+      - name: Verify AAB output path
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          ls -la "$ROOT/app/build/app/outputs/bundle/release/"*.aab
+    artifacts:
+      - app/build/app/outputs/bundle/release/*.aab
+
+  production_release:
+    name: production_release
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      android_signing:
+        - 0027_upload
+    scripts:
+      - name: Write Android local.properties
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          FLUTTER_BIN="$(command -v flutter)"
+          FLUTTER_ROOT="$(dirname "$(dirname "$FLUTTER_BIN")")"
+          SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          test -n "$SDK"
+          printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$SDK" "$FLUTTER_ROOT" > "$ROOT/app/android/local.properties"
+      - name: Flutter pub get
+        script: |
+          set -e
+          cd app
+          flutter pub get
+      - name: Flutter tests (exclude store listing goldens)
+        script: |
+          set -e
+          cd app
+          flutter test --exclude-tags store_listing
+      - name: Gradle bundleRelease (no flutter build appbundle)
+        script: |
+          set -e
+          cd app/android
+          chmod +x gradlew
+          ./gradlew bundleRelease --no-daemon --stacktrace
+      - name: Verify AAB output path
+        script: |
+          set -e
+          ROOT="$(pwd)"
+          ls -la "$ROOT/app/build/app/outputs/bundle/release/"*.aab
+    artifacts:
+      - app/build/app/outputs/bundle/release/*.aab
