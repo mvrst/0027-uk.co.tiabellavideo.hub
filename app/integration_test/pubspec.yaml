@@ -1,0 +1,21 @@
+# Separate package so `integration_test` is not part of the main app plugin graph.
+# Keeps `GeneratedPluginRegistrant` free of IntegrationTestPlugin for release/APK Gradle builds.
+name: hub_integration_test
+publish_to: "none"
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  hub:
+    path: ../
+  shared_preferences: ^2.3.3
+
+dev_dependencies:
+  flutter_lints: ^5.0.0

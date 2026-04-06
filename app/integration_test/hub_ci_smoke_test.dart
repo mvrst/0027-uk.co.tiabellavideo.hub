@@ -9,7 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../test/support/test_harness.dart';
 
-/// Deterministic smoke checks with [IntegrationTestWidgetsFlutterBinding] (CI-friendly `flutter test integration_test/...`).
+/// Deterministic smoke checks with [IntegrationTestWidgetsFlutterBinding].
+/// Run from `app/integration_test/`: `flutter pub get` then `flutter test hub_ci_smoke_test.dart`.
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 

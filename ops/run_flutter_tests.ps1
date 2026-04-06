@@ -4,4 +4,10 @@ $app = (Resolve-Path (Join-Path $PSScriptRoot "..\app")).Path
 Set-Location $app
 flutter pub get
 flutter test
-flutter test integration_test/hub_ci_smoke_test.dart
+Push-Location integration_test
+try {
+  flutter pub get
+  flutter test hub_ci_smoke_test.dart
+} finally {
+  Pop-Location
+}

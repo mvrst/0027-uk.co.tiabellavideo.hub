@@ -16,10 +16,12 @@ Run a single library:
 flutter test test/settings_legal_privacy_test.dart
 ```
 
-Integration-style binding (still headless / VM-friendly):
+Integration-style binding (still headless / VM-friendly) lives in a **separate package** under `app/integration_test/` so release Gradle builds do not register the `integration_test` Android plugin. Run:
 
 ```bash
-flutter test integration_test/hub_ci_smoke_test.dart
+cd integration_test
+flutter pub get
+flutter test hub_ci_smoke_test.dart
 ```
 
 ## Conventions
@@ -35,7 +37,7 @@ flutter test integration_test/hub_ci_smoke_test.dart
 
 ## Play Store screenshots (widget goldens)
 
-See [screenshots_workflow.md](screenshots_workflow.md) and [screenshots_manifest.md](screenshots_manifest.md). Generator: `app/test/screenshots/store_screenshot_golden_test.dart` (tag `store-screenshots`). Codemagic workflow id: **`store_screenshots`**.
+See [screenshots_workflow.md](screenshots_workflow.md) and [screenshots_manifest.md](screenshots_manifest.md). Generator: `app/test/screenshots/store_screenshot_golden_test.dart` (tags `store-screenshots`, **`store_listing`**). Release CI runs `flutter test --exclude-tags store_listing` so listing goldens are not part of AAB builds. Codemagic workflow id: **`store_screenshots`** (no `android_signing`).
 
 ## Layout
 
@@ -44,4 +46,4 @@ See [screenshots_workflow.md](screenshots_workflow.md) and [screenshots_manifest
 | `app/test/support/test_harness.dart` | Shared fonts + URL mock + pump helpers + `hubTestShell` |
 | `app/test/*_test.dart` | Widget tests by flow |
 | `app/test/screenshots/` | Play Store 1080×1920 golden PNG pipeline |
-| `app/integration_test/hub_ci_smoke_test.dart` | Minimal integration binding smoke |
+| `app/integration_test/` (`pubspec.yaml` + `hub_ci_smoke_test.dart`) | Minimal integration binding smoke (own `flutter pub get`; not in main app plugin list) |
