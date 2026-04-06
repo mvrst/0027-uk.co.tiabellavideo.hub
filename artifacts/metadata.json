@@ -1,0 +1,8 @@
+{
+  "repository": "0027-uk.co.tiabellavideo.hub",
+  "application_id": "uk.co.tiabellavideo.hub",
+  "design_source": "artifacts/design/0027.pen",
+  "contract_docs": "docs/",
+  "store_listing_assets": "artifacts/store-assets/",
+  "web_handoff": "artifacts/web-handoff/web/"
+}

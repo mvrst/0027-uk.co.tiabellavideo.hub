@@ -1,0 +1,221 @@
+# Test matrix — widget keys, scenarios, expectations
+# Use ValueKey<String> / SemanticsIdentifier matching `test_key` values below.
+
+version: 1
+# <PRIVACY_POLICY_URL> — same literal as this key’s value (Settings privacy row).
+PRIVACY_POLICY_URL: "https://tiabellavideo.co.uk/privacy-policy"
+
+# Tab bar: run TAB_* cases from a screen that includes the pill bar (e.g. S04).
+# S06, S08, S14 have no tab bar in 0027.pen — do not expect TK_TAB_* there.
+
+global_keys:
+  # Apply to every route shell (optional but recommended)
+  screen_scaffold_prefix: "screen_"
+
+screen_keys:
+  S01: TK_SCREEN_S01
+  S02: TK_SCREEN_S02
+  S03: TK_SCREEN_S03
+  S04: TK_SCREEN_S04
+  S05: TK_SCREEN_S05
+  S05B: TK_SCREEN_S05B
+  S05C: TK_SCREEN_S05C
+  S05D: TK_SCREEN_S05D
+  S06: TK_SCREEN_S06
+  S07: TK_SCREEN_S07
+  S08: TK_SCREEN_S08
+  S09: TK_SCREEN_S09
+  S10: TK_SCREEN_S10
+  S11: TK_SCREEN_S11
+  S12: TK_SCREEN_S12
+  S13: TK_SCREEN_S13
+  S14: TK_SCREEN_S14
+
+suites:
+
+  - id: navigation_routes
+    description: Each design screen is reachable at its stable route exactly once in nav graph.
+    cases:
+      - test_key: NAV_01
+        steps:
+          - assert_route: /splash
+          - assert_widget: TK_SCREEN_S01
+      - test_key: NAV_02
+        steps:
+          - navigate_to: /legal
+          - assert_widget: TK_SCREEN_S14
+      - test_key: NAV_03
+        steps:
+          - navigate_to: /portfolio/category/post-production
+          - assert_widget: TK_SCREEN_S05C
+
+  - id: tab_bar
+    description: Bottom pill tabs match docs/routes.yaml mapping.
+    cases:
+      - test_key: TAB_HOME
+        action: tap TK_TAB_HOME
+        expect_route: /dashboard
+      - test_key: TAB_PORTFOLIO
+        action: tap TK_TAB_PORTFOLIO
+        expect_route: /portfolio
+      - test_key: TAB_QUOTE
+        action: tap TK_TAB_QUOTE
+        expect_route: /quote
+      - test_key: TAB_STATUS
+        action: tap TK_TAB_STATUS
+        expect_route: /orders/status
+      - test_key: TAB_MORE
+        action: tap TK_TAB_MORE
+        expect_route: /settings
+
+  - id: settings_privacy_policy
+    description: >
+      CRITICAL — Privacy Policy opens external URL exactly PRIVACY_POLICY_URL.
+      No other URL may be used for this row.
+    cases:
+      - test_key: SETTINGS_PRIVACY_URL
+        given_screen: S13
+        steps:
+          - tap: TK_S13_PRIVACY_POLICY
+        expect:
+          - launched_url_equals: "https://tiabellavideo.co.uk/privacy-policy"
+
+  - id: settings_legal_internal
+    cases:
+      - test_key: LEGAL_NAV_INTERNAL
+        given_screen: S13
+        steps:
+          - tap: TK_S13_LEGAL
+        expect_route: /legal
+      - test_key: LEGAL_BACK
+        given_screen: S14
+        steps:
+          - tap: TK_S14_BACK
+        expect_route: /settings
+
+  - id: contact_form
+    description: Contact form validators and states (no backend).
+    cases:
+      - test_key: CONTACT_EMPTY
+        given_screen: S10
+        steps:
+          - tap: TK_S10_SEND
+        expect:
+          - inline_errors_visible: true
+          - fields: [TK_S10_FIELD_NAME, TK_S10_FIELD_EMAIL, TK_S10_FIELD_MESSAGE]
+      - test_key: CONTACT_INVALID_EMAIL
+        steps:
+          - enter_field: { key: TK_S10_FIELD_NAME, value: "Test User" }
+          - enter_field: { key: TK_S10_FIELD_EMAIL, value: "not-an-email" }
+          - enter_field: { key: TK_S10_FIELD_MESSAGE, value: "Hello there" }
+          - tap: TK_S10_SEND
+        expect:
+          - email_error_visible: true
+      - test_key: CONTACT_SUCCESS_LOCAL
+        steps:
+          - enter_field: { key: TK_S10_FIELD_NAME, value: "Test User" }
+          - enter_field: { key: TK_S10_FIELD_EMAIL, value: "valid@example.com" }
+          - enter_field: { key: TK_S10_FIELD_MESSAGE, value: "Valid message body" }
+          - tap: TK_S10_SEND
+        expect:
+          - snackbar_or_dialog: success_local
+          - must_not_claim: server_delivery
+      - test_key: CONTACT_POPULATED
+        description: Placeholders hidden when user types (design placeholders as empty state).
+        steps:
+          - enter_field: { key: TK_S10_FIELD_NAME, value: "Jane" }
+        expect:
+          - placeholder_state: hidden_for_name_field
+
+  - id: quote_tool
+    description: Selection state + local submit (no backend).
+    cases:
+      - test_key: QUOTE_DEFAULTS
+        given_screen: S07
+        expect:
+          - project_type_selected: video_production
+          # Design shows 2–3 Days selected
+          - duration_selected: two_to_three_days
+          - addon_colour_grading: true
+          - addon_motion_graphics: false
+          - addon_voiceover: false
+      - test_key: QUOTE_TOGGLE_ADDON
+        steps:
+          - tap: TK_S07_ADDON_MOTION
+        expect:
+          - addon_motion_graphics: true
+      - test_key: QUOTE_SUBMIT_LOCAL
+        steps:
+          - tap: TK_S07_SUBMIT
+        expect:
+          - confirmation_visible: true
+          - persisted_locally: true
+
+  - id: external_intents
+    cases:
+      - test_key: EXT_CALL
+        given_screen: S10
+        steps:
+          - tap: TK_S10_QUICK_CALL
+        expect:
+          - intent_action: android.intent.action.DIAL
+          - tel_uri_contains: "7388750289"
+      - test_key: EXT_MAILTO
+        steps:
+          - tap: TK_S10_QUICK_EMAIL
+        expect:
+          - intent_action: android.intent.action.SENDTO
+          - mailto_contains: "info@tiabellavideo.co.uk"
+      - test_key: EXT_WEBSITE
+        steps:
+          - tap: TK_S10_QUICK_WEBSITE
+        expect:
+          - launched_url: "https://tiabellavideo.co.uk"
+      - test_key: EXT_MAPS_ABOUT
+        given_screen: S11
+        steps:
+          - tap: TK_S11_MAPS
+        expect:
+          - intent_resolves: maps_or_geo
+          - query_contains: "Tiabella"
+
+  - id: portfolio_preview
+    cases:
+      - test_key: PREVIEW_BACK
+        given_screen: S06
+        steps:
+          - tap: TK_S06_BACK
+        expect_route: /portfolio
+      - test_key: PREVIEW_QUOTE
+        steps:
+          - tap: TK_S06_REQUEST_QUOTE
+        expect_route: /quote
+
+  - id: order_status_sample
+    description: Static sample data only; refresh reapplies same data.
+    cases:
+      - test_key: OS_SAMPLE
+        given_screen: S12
+        expect_text:
+          - "Corporate Brand Video"
+          - "TPH-2024-0112"
+          - "65% Complete"
+      - test_key: OS_REFRESH
+        steps:
+          - tap: TK_S12_REFRESH
+        expect:
+          - still_shows: sample_milestones
+
+# Field validation rules (mirror app_contract)
+validators:
+  contact_full_name:
+    required: true
+    trim: true
+    max_length: 120
+  contact_email:
+    required: true
+    format: email
+  contact_message:
+    required: true
+    trim: true
+    max_length: 4000

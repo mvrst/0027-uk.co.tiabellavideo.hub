@@ -1,0 +1,124 @@
+# Stable routes — Tiabella Production Hub
+# Source: artifacts/design/0027.pen (all frames named "Screen …")
+# <PACKAGE_NAME> = uk.co.tiabellavideo.hub  (see meta.application_id)
+# <PRIVACY_POLICY_URL> = value of PRIVACY_POLICY_URL below (Settings → Privacy Policy)
+
+meta:
+  application_id: uk.co.tiabellavideo.hub
+  repository_name: 0027-uk.co.tiabellavideo.hub
+  design_source: artifacts/design/0027.pen
+  screen_count: 17
+
+# Exact string required for Privacy Policy row on Settings (Screen 13).
+# Implementation MUST launch this URL with no substitution or query variants.
+PRIVACY_POLICY_URL: "https://tiabellavideo.co.uk/privacy-policy"
+
+# Optional: other external URLs taken verbatim from design copy (Contact / About).
+external_constants:
+  phone_e164_display: "+44 7388 750289"
+  email: "info@tiabellavideo.co.uk"
+  website_host_display: "tiabellavideo.co.uk"
+  # Intent URL for Website quick action; host matches design copy.
+  website_url: "https://tiabellavideo.co.uk"
+  # About → Open in Maps (no coordinates in design; search query only).
+  maps_search_query: "Tiabella"
+
+# Stable `project_id` query values for /portfolio/preview (labels from design source).
+portfolio_project_ids:
+  screen_S05:
+    - corporate_campaign
+    - broadcast_studio
+    - documentary_film
+    - product_showcase
+    - event_coverage
+    - brand_identity
+  screen_S05B:
+    - commercial_shoot
+    - music_video
+    - documentary_series
+    - live_event_capture
+  screen_S05C:
+    - colour_grading
+    - motion_graphics
+    - sound_design
+    - editing_assembly
+  screen_S05D:
+    - brand_launch_film
+    - executive_interviews
+    - annual_report_video
+    - training_programme
+
+routes:
+  - route: /splash
+    screen_id: S01
+    design_name: "Screen 01 — Splash"
+  - route: /onboarding/intro
+    screen_id: S02
+    design_name: "Screen 02 — Onboarding Intro"
+  - route: /onboarding/workflow
+    screen_id: S03
+    design_name: "Screen 03 — Onboarding Workflow"
+  - route: /dashboard
+    screen_id: S04
+    design_name: "Screen 04 — Dashboard"
+  - route: /portfolio
+    screen_id: S05
+    design_name: "Screen 05 — Portfolio"
+  - route: /portfolio/category/production
+    screen_id: S05B
+    design_name: "Screen 05b — Portfolio: Production"
+  - route: /portfolio/category/post-production
+    screen_id: S05C
+    design_name: "Screen 05c — Portfolio: Post-Production"
+  - route: /portfolio/category/corporate
+    screen_id: S05D
+    design_name: "Screen 05d — Portfolio: Corporate"
+  - route: /portfolio/preview
+    screen_id: S06
+    design_name: "Screen 06 — Portfolio Image Preview"
+    query_params:
+      - name: project_id
+        required: false
+        description: >
+          Selects which portfolio item’s image/title/subtitle to show.
+          When omitted, implementation uses the design-default preview
+          (“Corporate Campaign — Brand Launch” / Production / 2024).
+  - route: /quote
+    screen_id: S07
+    design_name: "Screen 07 — Quote Tool"
+    query_params:
+      - name: initial_project_type
+        required: false
+        enum: [video_production, post_production, photography]
+      - name: initial_duration
+        required: false
+        enum: [one_day, two_to_three_days, one_week_plus]
+  - route: /service/detail
+    screen_id: S08
+    design_name: "Screen 08 — Service Detail"
+  - route: /workflow
+    screen_id: S09
+    design_name: "Screen 09 — Workflow"
+  - route: /contact
+    screen_id: S10
+    design_name: "Screen 10 — Contact"
+  - route: /about
+    screen_id: S11
+    design_name: "Screen 11 — About Us"
+  - route: /orders/status
+    screen_id: S12
+    design_name: "Screen 12 — Order Status"
+  - route: /settings
+    screen_id: S13
+    design_name: "Screen 13 — Settings"
+  - route: /legal
+    screen_id: S14
+    design_name: "Screen 14 — Legal Information"
+
+# Bottom tab bar: label in design → route (internal)
+tab_bar:
+  HOME: /dashboard
+  PORTFOLIO: /portfolio
+  QUOTE: /quote
+  STATUS: /orders/status
+  MORE: /settings

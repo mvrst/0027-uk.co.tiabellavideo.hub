@@ -1,0 +1,23 @@
+# Codemagic — Tiabella Production Hub (uk.co.tiabellavideo.hub)
+# Repository: 0027-uk.co.tiabellavideo.hub
+
+workflows:
+  store_screenshots:
+    name: store_screenshots
+    instance_type: linux
+    max_build_duration: 45
+    environment:
+      flutter: stable
+    scripts:
+      - name: Install dependencies
+        script: |
+          set -e
+          cd app
+          flutter pub get
+      - name: Generate Play Store PNGs (widget goldens)
+        script: |
+          set -e
+          cd app
+          flutter test test/screenshots/store_screenshot_golden_test.dart --update-goldens --tags store-screenshots
+    artifacts:
+      - app/test/screenshots/goldens/**/*.png

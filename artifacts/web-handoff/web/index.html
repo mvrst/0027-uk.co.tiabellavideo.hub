@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tiabella Production Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <nav class="screen-rail" aria-label="Screens">
+        <h1>Screens</h1>
+        <button type="button" class="is-active" data-goto="s01">01 — Splash</button>
+        <button type="button" data-goto="s02">02 — Onboarding Intro</button>
+        <button type="button" data-goto="s03">03 — Onboarding Workflow</button>
+        <button type="button" data-goto="s04">04 — Dashboard</button>
+        <button type="button" data-goto="s05">05 — Portfolio</button>
+        <button type="button" data-goto="s15">05b — Portfolio: Production</button>
+        <button type="button" data-goto="s16">05c — Portfolio: Post</button>
+        <button type="button" data-goto="s17">05d — Portfolio: Corporate</button>
+        <button type="button" data-goto="s06">06 — Image Preview</button>
+        <button type="button" data-goto="s07">07 — Quote Tool</button>
+        <button type="button" data-goto="s08">08 — Service Detail</button>
+        <button type="button" data-goto="s09">09 — Workflow</button>
+        <button type="button" data-goto="s10">10 — Contact</button>
+        <button type="button" data-goto="s11">11 — About Us</button>
+        <button type="button" data-goto="s12">12 — Order Status</button>
+        <button type="button" data-goto="s13">13 — Settings</button>
+        <button type="button" data-goto="s14">14 — Legal</button>
+      </nav>
+
+      <div class="phone">
+        <!-- 01 Splash -->
+        <section class="screen screen--splash is-visible" id="s01">
+          <div class="status status--dark">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="splash-center">
+            <div class="logo-mark">T</div>
+            <p class="splash-title">Tiabella Production Hub</p>
+            <p class="splash-tag">PRODUCTION SERVICES</p>
+          </div>
+          <div class="splash-footer">tiabellavideo.co.uk</div>
+        </section>
+
+        <!-- 02 Onboarding -->
+        <section class="screen screen--onboard" id="s02">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div
+            class="ob-hero"
+            style="background-image: url(assets/images/unsplash-08.jpg)"
+          ></div>
+          <div class="ob-content">
+            <h2>Professional Production Services</h2>
+            <p>
+              Tiabella Production Hub gives you direct access to our services, project workflow,
+              and quotation tools — all in one place.
+            </p>
+            <div class="dots"><span class="dot is-on"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="ob-actions">
+              <button type="button" class="btn-text">Skip</button>
+              <button type="button" class="btn-primary">Next</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 03 Onboarding 2 -->
+        <section class="screen screen--onboard" id="s03">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div
+            class="ob-hero"
+            style="background-image: url(assets/images/unsplash-10.jpg)"
+          ></div>
+          <div class="ob-content">
+            <h2>Follow Every Project Stage</h2>
+            <p>
+              Track your project from initial brief to final delivery. Request quotes, review
+              milestones, and stay informed throughout the production process.
+            </p>
+            <div class="dots"><span class="dot"></span><span class="dot is-on"></span><span class="dot"></span></div>
+            <div class="ob-actions">
+              <button type="button" class="btn-text">Back</button>
+              <button type="button" class="btn-primary">Get Started</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 04 Dashboard -->
+        <section class="screen screen--dashboard" id="s04">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="header-row">
+            <div class="brand-row">
+              <div class="brand-mark">T</div>
+              <span class="brand-name">Tiabella Production Hub</span>
+            </div>
+          </div>
+          <div class="screen-body">
+            <div
+              class="hero-banner"
+              style="background-image: url(assets/images/unsplash-07.jpg)"
+            >
+              <div class="hero-banner__text">
+                <h2>Production Hub</h2>
+                <p>Services · Portfolio · Quotes</p>
+              </div>
+            </div>
+            <div class="section-pad" style="background: #fff">
+              <h3 class="section-title">Our Services</h3>
+              <div class="svc-row">
+                <div class="svc-card svc-card--a">
+                  <h3>Video Production</h3>
+                  <p>From brief to screen</p>
+                </div>
+                <div class="svc-card svc-card--b">
+                  <h3>Post Production</h3>
+                  <p>Editing & delivery</p>
+                </div>
+              </div>
+            </div>
+            <div class="section-pad">
+              <h3 class="section-title">Quick Access</h3>
+              <div class="qa-grid">
+                <div class="qa-tile"><i data-lucide="briefcase"></i> Services</div>
+                <div class="qa-tile"><i data-lucide="image"></i> Portfolio</div>
+                <div class="qa-tile"><i data-lucide="file-text"></i> Quote</div>
+              </div>
+              <div class="qa-grid qa-row2">
+                <div class="qa-tile"><i data-lucide="git-branch"></i> Workflow</div>
+                <div class="qa-tile"><i data-lucide="package"></i> Order Status</div>
+                <div class="qa-tile"><i data-lucide="phone"></i> Contact</div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab is-active"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05 Portfolio -->
+        <section class="screen screen--portfolio" id="s05">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header">
+            <h2>Portfolio</h2>
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
+          <div class="cat-row">
+            <span class="chip is-active">All</span>
+            <span class="chip">Production</span>
+            <span class="chip">Post-Production</span>
+            <span class="chip">Corporate</span>
+          </div>
+          <div class="screen-body">
+            <div class="pf-grid">
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-01.jpg)"
+                  ></div>
+                  <span>Corporate Campaign</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-02.jpg)"
+                  ></div>
+                  <span>Broadcast Studio</span>
+                </div>
+              </div>
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-03.jpg)"
+                  ></div>
+                  <span>Documentary Film</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-04.jpg)"
+                  ></div>
+                  <span>Product Showcase</span>
+                </div>
+              </div>
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-05.jpg)"
+                  ></div>
+                  <span>Event Coverage</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-06.jpg)"
+                  ></div>
+                  <span>Brand Identity</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab is-active"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05b Production -->
+        <section class="screen screen--portfolio" id="s15">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-sub-header">
+            <a class="back-link" href="#"><i data-lucide="chevron-left"></i> Portfolio</a>
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
+          <div class="cat-row">
+            <span class="chip">All</span>
+            <span class="chip is-active">Production</span>
+            <span class="chip">Post-Production</span>
+            <span class="chip">Corporate</span>
+          </div>
+          <div class="screen-body">
+            <div class="pf-grid">
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-11.jpg)"
+                  ></div>
+                  <span>Studio Shoot</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-12.jpg)"
+                  ></div>
+                  <span>Location Day</span>
+                </div>
+              </div>
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-13.jpg)"
+                  ></div>
+                  <span>Interview Set</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-14.jpg)"
+                  ></div>
+                  <span>Commercial</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab is-active"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05c Post -->
+        <section class="screen screen--portfolio" id="s16">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-sub-header">
+            <a class="back-link" href="#"><i data-lucide="chevron-left"></i> Portfolio</a>
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
+          <div class="cat-row">
+            <span class="chip">All</span>
+            <span class="chip">Production</span>
+            <span class="chip is-active">Post-Production</span>
+            <span class="chip">Corporate</span>
+          </div>
+          <div class="screen-body">
+            <div class="pf-grid">
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-15.jpg)"
+                  ></div>
+                  <span>Colour Suite</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-16.jpg)"
+                  ></div>
+                  <span>Edit Timeline</span>
+                </div>
+              </div>
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-17.jpg)"
+                  ></div>
+                  <span>Motion GFX</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-18.jpg)"
+                  ></div>
+                  <span>Sound Mix</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab is-active"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 05d Corporate -->
+        <section class="screen screen--portfolio" id="s17">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-sub-header">
+            <a class="back-link" href="#"><i data-lucide="chevron-left"></i> Portfolio</a>
+            <i data-lucide="sliders-horizontal"></i>
+          </div>
+          <div class="cat-row">
+            <span class="chip">All</span>
+            <span class="chip">Production</span>
+            <span class="chip">Post-Production</span>
+            <span class="chip is-active">Corporate</span>
+          </div>
+          <div class="screen-body">
+            <div class="pf-grid">
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-19.jpg)"
+                  ></div>
+                  <span>Annual Report</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-20.jpg)"
+                  ></div>
+                  <span>Leadership Film</span>
+                </div>
+              </div>
+              <div class="pf-row">
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-21.jpg)"
+                  ></div>
+                  <span>Training Series</span>
+                </div>
+                <div class="pf-item">
+                  <div
+                    class="pf-item__img"
+                    style="background-image: url(assets/images/unsplash-22.jpg)"
+                  ></div>
+                  <span>Brand Film</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab is-active"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 06 Preview -->
+        <section class="screen screen--preview" id="s06">
+          <div class="status status--dark">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-sub-header" style="background: transparent; color: #fff">
+            <a class="back-link" href="#" style="color: #fff"><i data-lucide="chevron-left"></i> Portfolio</a>
+            <span style="font-size: 12px; color: #b2bec3">2024</span>
+          </div>
+          <div
+            class="preview-img"
+            style="background-image: url(assets/images/unsplash-07.jpg)"
+          ></div>
+          <div class="preview-meta">
+            <p style="font-size: 11px; color: #b2bec3; margin: 0 0 8px">Production</p>
+            <h2>Corporate Campaign — Brand Launch</h2>
+            <p>
+              Full production from concept development through to final delivery. Multi-location
+              shoot with post-production editing and colour grading.
+            </p>
+            <button type="button" class="btn-primary" style="margin-top: 20px; width: 100%">
+              Request a Quote
+            </button>
+          </div>
+        </section>
+
+        <!-- 07 Quote -->
+        <section class="screen screen--quote" id="s07">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header">
+            <h2>Quote Request</h2>
+          </div>
+          <div class="screen-body">
+            <div class="quote-card">
+              <p class="field-label">Project Type</p>
+              <div class="pill-group">
+                <span class="pill-opt is-selected">Video Production</span>
+                <span class="pill-opt">Post Production</span>
+                <span class="pill-opt">Photography</span>
+              </div>
+            </div>
+            <div class="quote-card">
+              <p class="field-label">Project Duration</p>
+              <div class="pill-group">
+                <span class="pill-opt is-selected">1 Day</span>
+                <span class="pill-opt">2–3 Days</span>
+                <span class="pill-opt">1 Week+</span>
+              </div>
+            </div>
+            <div class="quote-card">
+              <p class="field-label">Add-On Services</p>
+              <div class="pill-group">
+                <span class="pill-opt">Colour Grading</span>
+                <span class="pill-opt">Motion Graphics</span>
+                <span class="pill-opt">Voiceover & Audio</span>
+              </div>
+            </div>
+            <div class="quote-card">
+              <p class="field-label">Estimated Range</p>
+              <p style="margin: 0; font-size: 13px; color: var(--muted)">Subject to brief</p>
+              <p style="margin: 12px 0 0; font-size: 14px; font-weight: 600">Contact us for a tailored quote</p>
+              <p style="margin: 4px 0 0; font-size: 12px; color: var(--muted)">
+                We'll review your requirements and respond within 1 business day.
+              </p>
+              <button type="button" class="btn-primary" style="width: 100%; margin-top: 16px">
+                Submit Quote Request
+              </button>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab is-active"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 08 Service -->
+        <section class="screen" id="s08" style="background: var(--bg)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="header-row">
+            <span class="brand-name">Services</span>
+          </div>
+          <div class="screen-body">
+            <div
+              class="svc-hero"
+              style="background-image: url(assets/images/unsplash-08.jpg)"
+            ></div>
+            <div class="svc-detail" style="background: #fff; margin-top: -12px; border-radius: 16px 16px 0 0">
+              <p style="font-size: 11px; font-weight: 600; color: var(--muted); margin: 0 0 4px">
+                Video Production
+              </p>
+              <h2>Full-Service Video Production</h2>
+              <p>
+                End-to-end production from initial concept and scripting through to shooting and
+                delivery. We work with businesses of all sizes across corporate, commercial, and
+                documentary formats.
+              </p>
+              <h3 class="section-title" style="font-size: 15px">What's Included</h3>
+              <ul class="list-check">
+                <li>Pre-production planning and scripting</li>
+                <li>Multi-camera location shoot</li>
+                <li>Professional editing and colour grading</li>
+                <li>Final delivery in required formats</li>
+              </ul>
+              <p style="font-size: 13px; color: var(--muted); margin: 16px 0">
+                Pricing is project-specific. Request a quote for a tailored estimate.
+              </p>
+              <button type="button" class="btn-primary" style="width: 100%">Get a Quote for This Service</button>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 09 Workflow -->
+        <section class="screen" id="s09" style="background: var(--white)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header"><h2>How We Work</h2></div>
+          <div class="screen-body">
+            <p style="padding: 0 20px 16px; margin: 0; color: var(--muted); font-size: 14px">
+              A clear, managed process from first contact to final delivery.
+            </p>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div>
+                  <h3>Initial Enquiry</h3>
+                  <p>
+                    You contact us with your project idea. We'll follow up to understand your
+                    requirements, timeline, and objectives.
+                  </p>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div>
+                  <h3>Quotation & Brief</h3>
+                  <p>
+                    We prepare a detailed quote and scope of work. Once agreed, a project brief is
+                    confirmed and signed off.
+                  </p>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div>
+                  <h3>Pre-Production</h3>
+                  <p>
+                    Scripting, shot lists, location scouting, and scheduling. All logistics are handled
+                    before production begins.
+                  </p>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div>
+                  <h3>Production</h3>
+                  <p>
+                    The shoot takes place to plan. Our crew manages all aspects on location or in
+                    studio.
+                  </p>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-dot"></div>
+                <div>
+                  <h3>Delivery & Review</h3>
+                  <p>
+                    Final files are delivered for review. Revisions are handled within the agreed
+                    scope before sign-off.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10 Contact -->
+        <section class="screen" id="s10" style="background: var(--bg)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header"><h2>Contact Us</h2></div>
+          <div class="screen-body">
+            <div class="contact-actions">
+              <div class="contact-btn"><i data-lucide="phone"></i> Call</div>
+              <div class="contact-btn"><i data-lucide="mail"></i> Email</div>
+              <div class="contact-btn"><i data-lucide="globe"></i> Website</div>
+            </div>
+            <div style="padding: 0 20px 12px; font-size: 14px">
+              <p style="margin: 0 0 4px; font-weight: 600">+44 7388 750289</p>
+              <p style="margin: 0 0 4px; color: var(--muted)">info@tiabellavideo.co.uk</p>
+              <p style="margin: 0; color: var(--muted)">tiabellavideo.co.uk</p>
+            </div>
+            <h3 class="section-title" style="padding-left: 20px">Send a Message</h3>
+            <div class="form-block">
+              <label>Full Name</label>
+              <input type="text" placeholder="Your full name" />
+              <label>Email Address</label>
+              <input type="email" placeholder="your@email.com" />
+              <label>Message</label>
+              <textarea placeholder="Describe your project or enquiry..."></textarea>
+              <button type="button" class="btn-primary" style="width: 100%">Send Message</button>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11 About -->
+        <section class="screen" id="s11" style="background: var(--white)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header"><h2>About Us</h2></div>
+          <div class="screen-body">
+            <div class="about-hero">
+              <div class="logo-mark" style="margin: 0 auto 12px">T</div>
+              <p style="margin: 0; font-weight: 700">Tiabella Production Hub</p>
+              <p style="margin: 4px 0 0; font-size: 12px; letter-spacing: 2px; color: var(--muted)">
+                PRODUCTION SERVICES
+              </p>
+            </div>
+            <h3 class="section-title" style="padding: 0 20px">Who We Are</h3>
+            <p style="padding: 0 20px 16px; margin: 0; font-size: 14px; line-height: 1.6; color: var(--muted)">
+              Tiabella is a professional production services company providing video production,
+              post-production, and related services to businesses and organisations.<br /><br />
+              We work with clients across corporate, commercial, and documentary sectors, managing
+              projects from initial brief through to final delivery.
+            </p>
+            <div class="stat-row">
+              <div class="stat"><strong>Production</strong><span style="font-size: 11px; color: var(--muted)">Core</span></div>
+              <div class="stat"><strong>Post-Production</strong><span style="font-size: 11px; color: var(--muted)">Edit</span></div>
+              <div class="stat"><strong>Photography</strong><span style="font-size: 11px; color: var(--muted)">Still</span></div>
+            </div>
+            <div
+              style="margin: 0 20px 16px; height: 140px; border-radius: 12px; background: url(assets/images/unsplash-09.jpg) center/cover"
+            ></div>
+            <div style="padding: 0 20px">
+              <p class="field-label">Location</p>
+              <button type="button" class="btn-primary" style="width: 100%; margin-bottom: 20px">
+                Open in Maps
+              </button>
+              <p class="field-label">Get in Touch</p>
+              <p style="margin: 0 0 4px">info@tiabellavideo.co.uk</p>
+              <p style="margin: 0">tiabellavideo.co.uk</p>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12 Order -->
+        <section class="screen" id="s12" style="background: var(--bg)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header"><h2>Order Status</h2></div>
+          <div class="screen-body">
+            <div style="padding: 16px 20px; background: #fff; margin: 0 20px 16px; border-radius: 12px">
+              <p style="margin: 0; font-weight: 700">Corporate Brand Video</p>
+              <p style="margin: 4px 0 0; font-size: 12px; color: #27ae60; font-weight: 600">In Production</p>
+              <p style="margin: 8px 0 0; font-size: 12px; color: var(--muted)">Ref: TPH-2024-0112</p>
+            </div>
+            <div class="progress-ring">
+              <p style="margin: 0 0 8px; font-size: 12px; color: var(--muted)">Overall Progress</p>
+              <strong>65% Complete</strong>
+            </div>
+            <h3 class="section-title" style="padding-left: 20px">Project Milestones</h3>
+            <div style="background: #fff; margin: 0 20px; border-radius: 12px; overflow: hidden">
+              <div class="milestone">
+                <h4>Brief & Quotation</h4>
+                <p>Completed · 14 Jan 2024</p>
+              </div>
+              <div class="milestone">
+                <h4>Pre-Production</h4>
+                <p>Completed · 21 Jan 2024</p>
+              </div>
+              <div class="milestone">
+                <h4>Production Shoot</h4>
+                <p>In Progress · Est. 4 Feb 2024</p>
+              </div>
+              <div class="milestone">
+                <h4>Post-Production</h4>
+                <p>Pending</p>
+              </div>
+              <div class="milestone">
+                <h4>Final Delivery</h4>
+                <p>Pending</p>
+              </div>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab is-active"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 13 Settings -->
+        <section class="screen" id="s13" style="background: var(--bg)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header"><h2>Settings</h2></div>
+          <div class="screen-body">
+            <div class="settings-group">
+              <h3>PREFERENCES</h3>
+              <div style="background: #fff; border-radius: 12px; padding: 0 16px">
+                <div class="settings-row">Notifications</div>
+                <div class="settings-row">Email Updates</div>
+              </div>
+              <h3>LEGAL</h3>
+              <div style="background: #fff; border-radius: 12px; padding: 0 16px">
+                <div class="settings-row">Privacy Policy <span style="font-size: 11px; color: var(--muted)">External</span></div>
+                <div class="settings-row">Legal Information</div>
+              </div>
+              <button type="button" class="btn-text" style="padding: 20px; font-size: 15px; color: #c0392b">
+                Sign Out
+              </button>
+            </div>
+          </div>
+          <div class="tabbar">
+            <div class="tabbar__pill">
+              <button type="button" class="tab"><i data-lucide="house"></i> HOME</button>
+              <button type="button" class="tab"><i data-lucide="image"></i> PORTFOLIO</button>
+              <button type="button" class="tab"><i data-lucide="file-text"></i> QUOTE</button>
+              <button type="button" class="tab"><i data-lucide="activity"></i> STATUS</button>
+              <button type="button" class="tab"><i data-lucide="menu"></i> MORE</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14 Legal -->
+        <section class="screen" id="s14" style="background: var(--white)">
+          <div class="status status--light">
+            <span>9:41</span>
+            <div class="status__icons">
+              <i data-lucide="signal"></i><i data-lucide="wifi"></i><i data-lucide="battery-full"></i>
+            </div>
+          </div>
+          <div class="pf-header">
+            <h2 style="font-size: 18px">Legal Information</h2>
+          </div>
+          <div class="screen-body legal-block">
+            <h3>Terms of Use</h3>
+            <p>
+              By using the Tiabella Production Hub app, you agree to use it solely for the purpose
+              of reviewing services, requesting quotations, and managing your projects with
+              Tiabella.<br /><br />
+              All content within this app is the property of Tiabella. Quotation submissions made
+              through this app do not constitute a binding contract until formally confirmed in
+              writing.
+            </p>
+            <h3>Data & Privacy (GDPR)</h3>
+            <p>
+              Tiabella collects only the personal data necessary to process your enquiries and manage
+              your project. Your data is not shared with third parties except where required to
+              deliver our services.<br /><br />
+              You have the right to access, correct, or request deletion of your personal data at any
+              time. Contact us at info@tiabellavideo.co.uk to exercise these rights.<br /><br />
+              For our full Privacy Policy, please visit the link available in Settings.
+            </p>
+            <h3>General Legal Notice</h3>
+            <p>
+              Tiabella is a UK-registered limited liability partnership. This app is provided for
+              informational and client-service purposes only. Content is subject to change without
+              notice.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+      if (window.lucide) lucide.createIcons();
+    </script>
+  </body>
+</html>

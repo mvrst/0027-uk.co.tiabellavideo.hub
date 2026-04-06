@@ -1,0 +1,1052 @@
+# Action map — every tappable control → internal route or external / system action
+# Source: artifacts/design/0027.pen. Do not add features not present in design.
+# <PRIVACY_POLICY_URL> == PRIVACY_POLICY_URL (same literal string as routes.yaml).
+
+version: 1
+PRIVACY_POLICY_URL: "https://tiabellavideo.co.uk/privacy-policy"
+
+conventions:
+  internal: navigate_replace_or_push
+  external: android_intent_or_equivalent
+  local_state: in_memory_or_shared_preferences
+  # Bottom pill tabs: reuse the same ValueKeys (TK_TAB_*) on every screen where the design includes the tab bar.
+  tab_bar_screens: [S04, S05, S05B, S05C, S05D, S07, S09, S10, S11, S12, S13]
+  no_tab_bar_screens: [S01, S02, S03, S06, S08, S14]
+
+actions:
+
+  # --- Screen 01 — Splash (/splash) ---
+  - element_id: splash_root_continue
+    screen: S01
+    design_note: No explicit CTA; implementation chooses one documented strategy (timer or full-screen tap).
+    type: internal
+    destination: /onboarding/intro
+    test_key: TK_S01_CONTINUE
+
+  - element_id: splash_footer_domain
+    screen: S01
+    label: "tiabellavideo.co.uk"
+    type: external
+    action: open_url
+    url: "https://tiabellavideo.co.uk"
+    test_key: TK_S01_FOOTER_WEBSITE
+
+  # --- Screen 02 — Onboarding Intro (/onboarding/intro) ---
+  - element_id: ob_intro_skip
+    screen: S02
+    label: Skip
+    type: internal
+    destination: /dashboard
+    test_key: TK_S02_SKIP
+
+  - element_id: ob_intro_next
+    screen: S02
+    label: Next
+    type: internal
+    destination: /onboarding/workflow
+    test_key: TK_S02_NEXT
+
+  # --- Screen 03 — Onboarding Workflow (/onboarding/workflow) ---
+  - element_id: ob_flow_back
+    screen: S03
+    label: Back
+    type: internal
+    destination: /onboarding/intro
+    test_key: TK_S03_BACK
+
+  - element_id: ob_flow_get_started
+    screen: S03
+    label: Get Started
+    type: internal
+    destination: /dashboard
+    test_key: TK_S03_GET_STARTED
+
+  # --- Screen 04 — Dashboard (/dashboard) ---
+  - element_id: db_quick_services
+    screen: S04
+    label: Services
+    type: internal
+    destination: /service/detail
+    test_key: TK_S04_QUICK_SERVICES
+
+  - element_id: db_quick_portfolio
+    screen: S04
+    label: Portfolio
+    type: internal
+    destination: /portfolio
+    test_key: TK_S04_QUICK_PORTFOLIO
+
+  - element_id: db_quick_quote
+    screen: S04
+    label: Quote
+    type: internal
+    destination: /quote
+    test_key: TK_S04_QUICK_QUOTE
+
+  - element_id: db_quick_workflow
+    screen: S04
+    label: Workflow
+    type: internal
+    destination: /workflow
+    test_key: TK_S04_QUICK_WORKFLOW
+
+  - element_id: db_quick_order_status
+    screen: S04
+    label: Order Status
+    type: internal
+    destination: /orders/status
+    test_key: TK_S04_QUICK_STATUS
+
+  - element_id: db_quick_contact
+    screen: S04
+    label: Contact
+    type: internal
+    destination: /contact
+    test_key: TK_S04_QUICK_CONTACT
+
+  - element_id: db_card_video_production
+    screen: S04
+    label: Video Production
+    type: internal
+    destination: /service/detail
+    test_key: TK_S04_CARD_VIDEO
+
+  - element_id: db_card_post_production
+    screen: S04
+    label: Post Production
+    type: internal
+    destination: /quote
+    args:
+      initial_project_type: post_production
+    design_note: >
+      Design includes only one Service Detail screen (Video Production).
+      Post Production card routes to Quote Tool with matching project type.
+
+  - element_id: db_tab_home
+    screen: S04
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+
+  - element_id: db_tab_portfolio
+    screen: S04
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+
+  - element_id: db_tab_quote
+    screen: S04
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+
+  - element_id: db_tab_status
+    screen: S04
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+
+  - element_id: db_tab_more
+    screen: S04
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 05 — Portfolio (/portfolio) ---
+  - element_id: pf_header_filter
+    screen: S05
+    design_control: sliders-horizontal icon
+    type: local_state
+    action: toggle_or_open_filters
+    test_key: TK_S05_FILTER_ICON
+
+  - element_id: pf_chip_all
+    screen: S05
+    label: All
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05_CHIP_ALL
+
+  - element_id: pf_chip_production
+    screen: S05
+    label: Production
+    type: internal
+    destination: /portfolio/category/production
+    test_key: TK_S05_CHIP_PRODUCTION
+
+  - element_id: pf_chip_post
+    screen: S05
+    label: Post-Production
+    type: internal
+    destination: /portfolio/category/post-production
+    test_key: TK_S05_CHIP_POST
+
+  - element_id: pf_chip_corporate
+    screen: S05
+    label: Corporate
+    type: internal
+    destination: /portfolio/category/corporate
+    test_key: TK_S05_CHIP_CORPORATE
+
+  - element_id: pf_tile_corporate_campaign
+    screen: S05
+    label: Corporate Campaign
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: corporate_campaign }
+    test_key: TK_S05_TILE_CORPORATE_CAMPAIGN
+
+  - element_id: pf_tile_broadcast_studio
+    screen: S05
+    label: Broadcast Studio
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: broadcast_studio }
+    test_key: TK_S05_TILE_BROADCAST_STUDIO
+
+  - element_id: pf_tile_documentary_film
+    screen: S05
+    label: Documentary Film
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: documentary_film }
+    test_key: TK_S05_TILE_DOCUMENTARY_FILM
+
+  - element_id: pf_tile_product_showcase
+    screen: S05
+    label: Product Showcase
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: product_showcase }
+    test_key: TK_S05_TILE_PRODUCT_SHOWCASE
+
+  - element_id: pf_tile_event_coverage
+    screen: S05
+    label: Event Coverage
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: event_coverage }
+    test_key: TK_S05_TILE_EVENT_COVERAGE
+
+  - element_id: pf_tile_brand_identity
+    screen: S05
+    label: Brand Identity
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: brand_identity }
+    test_key: TK_S05_TILE_BRAND_IDENTITY
+
+  # Tab bar (same destinations as S04; active tab PORTFOLIO)
+  - element_id: pf_tab_home
+    screen: S05
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: pf_tab_portfolio
+    screen: S05
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: pf_tab_quote
+    screen: S05
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: pf_tab_status
+    screen: S05
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: pf_tab_more
+    screen: S05
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 05b — Production (/portfolio/category/production) ---
+  - element_id: s05b_back
+    screen: S05B
+    label: Portfolio (chevron back)
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05B_BACK
+
+  - element_id: s05b_filter
+    screen: S05B
+    type: local_state
+    action: toggle_or_open_filters
+    test_key: TK_S05B_FILTER
+
+  - element_id: s05b_chip_all
+    screen: S05B
+    label: All
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05B_CHIP_ALL
+  - element_id: s05b_chip_production
+    screen: S05B
+    label: Production
+    type: internal
+    destination: /portfolio/category/production
+    test_key: TK_S05B_CHIP_PRODUCTION
+  - element_id: s05b_chip_post
+    screen: S05B
+    label: Post-Production
+    type: internal
+    destination: /portfolio/category/post-production
+    test_key: TK_S05B_CHIP_POST
+  - element_id: s05b_chip_corporate
+    screen: S05B
+    label: Corporate
+    type: internal
+    destination: /portfolio/category/corporate
+    test_key: TK_S05B_CHIP_CORPORATE
+
+  - element_id: s05b_tile_commercial_shoot
+    screen: S05B
+    label: Commercial Shoot
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: commercial_shoot }
+    test_key: TK_S05B_TILE_COMMERCIAL_SHOOT
+  - element_id: s05b_tile_music_video
+    screen: S05B
+    label: Music Video
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: music_video }
+    test_key: TK_S05B_TILE_MUSIC_VIDEO
+  - element_id: s05b_tile_documentary_series
+    screen: S05B
+    label: Documentary Series
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: documentary_series }
+    test_key: TK_S05B_TILE_DOCUMENTARY_SERIES
+  - element_id: s05b_tile_live_event_capture
+    screen: S05B
+    label: Live Event Capture
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: live_event_capture }
+    test_key: TK_S05B_TILE_LIVE_EVENT_CAPTURE
+
+  - element_id: s05b_tab_home
+    screen: S05B
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: s05b_tab_portfolio
+    screen: S05B
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: s05b_tab_quote
+    screen: S05B
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: s05b_tab_status
+    screen: S05B
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: s05b_tab_more
+    screen: S05B
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 05c — Post-Production ---
+  - element_id: s05c_back
+    screen: S05C
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05C_BACK
+
+  - element_id: s05c_filter
+    screen: S05C
+    design_control: sliders-horizontal icon
+    type: local_state
+    action: toggle_or_open_filters
+    test_key: TK_S05C_FILTER
+
+  - element_id: s05c_chip_all
+    screen: S05C
+    label: All
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05C_CHIP_ALL
+  - element_id: s05c_chip_production
+    screen: S05C
+    label: Production
+    type: internal
+    destination: /portfolio/category/production
+    test_key: TK_S05C_CHIP_PRODUCTION
+  - element_id: s05c_chip_post
+    screen: S05C
+    label: Post-Production
+    type: internal
+    destination: /portfolio/category/post-production
+    test_key: TK_S05C_CHIP_POST
+  - element_id: s05c_chip_corporate
+    screen: S05C
+    label: Corporate
+    type: internal
+    destination: /portfolio/category/corporate
+    test_key: TK_S05C_CHIP_CORPORATE
+
+  - element_id: s05c_tile_colour_grading
+    screen: S05C
+    label: Colour Grading
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: colour_grading }
+    test_key: TK_S05C_TILE_COLOUR_GRADING
+  - element_id: s05c_tile_motion_graphics
+    screen: S05C
+    label: Motion Graphics
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: motion_graphics }
+    test_key: TK_S05C_TILE_MOTION_GRAPHICS
+  - element_id: s05c_tile_sound_design
+    screen: S05C
+    label: Sound Design
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: sound_design }
+    test_key: TK_S05C_TILE_SOUND_DESIGN
+  - element_id: s05c_tile_editing_assembly
+    screen: S05C
+    label: Editing & Assembly
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: editing_assembly }
+    test_key: TK_S05C_TILE_EDITING_ASSEMBLY
+
+  - element_id: s05c_tab_home
+    screen: S05C
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: s05c_tab_portfolio
+    screen: S05C
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: s05c_tab_quote
+    screen: S05C
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: s05c_tab_status
+    screen: S05C
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: s05c_tab_more
+    screen: S05C
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 05d — Corporate ---
+  - element_id: s05d_back
+    screen: S05D
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05D_BACK
+
+  - element_id: s05d_filter
+    screen: S05D
+    design_control: sliders-horizontal icon
+    type: local_state
+    action: toggle_or_open_filters
+    test_key: TK_S05D_FILTER
+
+  - element_id: s05d_chip_all
+    screen: S05D
+    label: All
+    type: internal
+    destination: /portfolio
+    test_key: TK_S05D_CHIP_ALL
+  - element_id: s05d_chip_production
+    screen: S05D
+    label: Production
+    type: internal
+    destination: /portfolio/category/production
+    test_key: TK_S05D_CHIP_PRODUCTION
+  - element_id: s05d_chip_post
+    screen: S05D
+    label: Post-Production
+    type: internal
+    destination: /portfolio/category/post-production
+    test_key: TK_S05D_CHIP_POST
+  - element_id: s05d_chip_corporate
+    screen: S05D
+    label: Corporate
+    type: internal
+    destination: /portfolio/category/corporate
+    test_key: TK_S05D_CHIP_CORPORATE
+  - element_id: s05d_tile_brand_launch_film
+    screen: S05D
+    label: Brand Launch Film
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: brand_launch_film }
+    test_key: TK_S05D_TILE_BRAND_LAUNCH_FILM
+  - element_id: s05d_tile_executive_interviews
+    screen: S05D
+    label: Executive Interviews
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: executive_interviews }
+    test_key: TK_S05D_TILE_EXECUTIVE_INTERVIEWS
+  - element_id: s05d_tile_annual_report_video
+    screen: S05D
+    label: Annual Report Video
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: annual_report_video }
+    test_key: TK_S05D_TILE_ANNUAL_REPORT_VIDEO
+  - element_id: s05d_tile_training_programme
+    screen: S05D
+    label: Training Programme
+    type: internal
+    destination: /portfolio/preview
+    args: { project_id: training_programme }
+    test_key: TK_S05D_TILE_TRAINING_PROGRAMME
+
+  - element_id: s05d_tab_home
+    screen: S05D
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: s05d_tab_portfolio
+    screen: S05D
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: s05d_tab_quote
+    screen: S05D
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: s05d_tab_status
+    screen: S05D
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: s05d_tab_more
+    screen: S05D
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 06 — Preview (/portfolio/preview) ---
+  - element_id: prev_back
+    screen: S06
+    label: Portfolio
+    type: internal
+    action: pop_or_navigate
+    destination: /portfolio
+    test_key: TK_S06_BACK
+
+  - element_id: prev_share
+    screen: S06
+    type: external
+    action: android_share_sheet
+    test_key: TK_S06_SHARE
+
+  - element_id: prev_chevron_left
+    screen: S06
+    type: local_state
+    action: carousel_previous
+    test_key: TK_S06_CAROUSEL_PREV
+
+  - element_id: prev_chevron_right
+    screen: S06
+    type: local_state
+    action: carousel_next
+    test_key: TK_S06_CAROUSEL_NEXT
+
+  - element_id: prev_request_quote
+    screen: S06
+    label: Request a Quote
+    type: internal
+    destination: /quote
+    test_key: TK_S06_REQUEST_QUOTE
+
+  # --- Screen 07 — Quote (/quote) ---
+  - element_id: qt_close
+    screen: S07
+    design_control: x icon
+    type: internal
+    action: pop_or_navigate
+    destination: /dashboard
+    test_key: TK_S07_CLOSE
+
+  - element_id: qt_type_video_production
+    screen: S07
+    label: Video Production
+    type: local_state
+    action: select_project_type
+    value: video_production
+    test_key: TK_S07_TYPE_VIDEO
+
+  - element_id: qt_type_post_production
+    screen: S07
+    label: Post Production
+    type: local_state
+    action: select_project_type
+    value: post_production
+    test_key: TK_S07_TYPE_POST
+
+  - element_id: qt_type_photography
+    screen: S07
+    label: Photography
+    type: local_state
+    action: select_project_type
+    value: photography
+    test_key: TK_S07_TYPE_PHOTO
+
+  - element_id: qt_dur_1_day
+    screen: S07
+    label: 1 Day
+    type: local_state
+    action: select_duration
+    value: one_day
+    test_key: TK_S07_DUR_1
+
+  - element_id: qt_dur_2_3
+    screen: S07
+    label: 2–3 Days
+    type: local_state
+    action: select_duration
+    value: two_to_three_days
+    test_key: TK_S07_DUR_23
+
+  - element_id: qt_dur_1_week_plus
+    screen: S07
+    label: 1 Week+
+    type: local_state
+    action: select_duration
+    value: one_week_plus
+    test_key: TK_S07_DUR_WK
+
+  - element_id: qt_addon_colour_grading
+    screen: S07
+    label: Colour Grading
+    type: local_state
+    action: toggle_addon
+    test_key: TK_S07_ADDON_COLOUR
+
+  - element_id: qt_addon_motion_graphics
+    screen: S07
+    label: Motion Graphics
+    type: local_state
+    action: toggle_addon
+    test_key: TK_S07_ADDON_MOTION
+
+  - element_id: qt_addon_voiceover
+    screen: S07
+    label: Voiceover & Audio
+    type: local_state
+    action: toggle_addon
+    test_key: TK_S07_ADDON_VOICE
+
+  - element_id: qt_submit
+    screen: S07
+    label: Submit Quote Request
+    type: local_state
+    action: submit_quote_request_local
+    design_note: No backend; see app_contract §5.2
+    test_key: TK_S07_SUBMIT
+
+  # Quote tab bar (active tab QUOTE)
+  - element_id: qt_tab_home
+    screen: S07
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: qt_tab_portfolio
+    screen: S07
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: qt_tab_quote
+    screen: S07
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: qt_tab_status
+    screen: S07
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: qt_tab_more
+    screen: S07
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 08 — Service Detail (/service/detail) ---
+  - element_id: sd_back
+    screen: S08
+    label: Services
+    type: internal
+    action: pop_or_navigate
+    destination: /dashboard
+    test_key: TK_S08_BACK
+
+  - element_id: sd_get_quote
+    screen: S08
+    label: Get a Quote for This Service
+    type: internal
+    destination: /quote
+    args:
+      initial_project_type: video_production
+    test_key: TK_S08_GET_QUOTE
+
+  # --- Screen 09 — Workflow (/workflow) ---
+  - element_id: wf_tab_home
+    screen: S09
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: wf_tab_portfolio
+    screen: S09
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: wf_tab_quote
+    screen: S09
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: wf_tab_status
+    screen: S09
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: wf_tab_more
+    screen: S09
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 10 — Contact (/contact) ---
+  - element_id: ct_quick_call
+    screen: S10
+    label: Call
+    type: external
+    action: dial_phone
+    phone: "+447388750289"
+    test_key: TK_S10_QUICK_CALL
+
+  - element_id: ct_quick_email
+    screen: S10
+    label: Email
+    type: external
+    action: send_email
+    email: "info@tiabellavideo.co.uk"
+    test_key: TK_S10_QUICK_EMAIL
+
+  - element_id: ct_quick_website
+    screen: S10
+    label: Website
+    type: external
+    action: open_url
+    url: "https://tiabellavideo.co.uk"
+    test_key: TK_S10_QUICK_WEBSITE
+
+  - element_id: ct_detail_phone
+    screen: S10
+    label: "+44 7388 750289"
+    type: external
+    action: dial_phone
+    phone: "+447388750289"
+    test_key: TK_S10_DETAIL_PHONE
+
+  - element_id: ct_detail_email
+    screen: S10
+    label: "info@tiabellavideo.co.uk"
+    type: external
+    action: send_email
+    email: "info@tiabellavideo.co.uk"
+    test_key: TK_S10_DETAIL_EMAIL
+
+  - element_id: ct_detail_website
+    screen: S10
+    label: "tiabellavideo.co.uk"
+    type: external
+    action: open_url
+    url: "https://tiabellavideo.co.uk"
+    test_key: TK_S10_DETAIL_WEBSITE
+
+  - element_id: ct_field_full_name
+    screen: S10
+    label: Full Name
+    type: form_field
+    field_key: contact_full_name
+    test_key: TK_S10_FIELD_NAME
+
+  - element_id: ct_field_email
+    screen: S10
+    label: Email Address
+    type: form_field
+    field_key: contact_email
+    test_key: TK_S10_FIELD_EMAIL
+
+  - element_id: ct_field_message
+    screen: S10
+    label: Message
+    type: form_field
+    field_key: contact_message
+    test_key: TK_S10_FIELD_MESSAGE
+
+  - element_id: ct_send_message
+    screen: S10
+    label: Send Message
+    type: local_state
+    action: submit_contact_form_local
+    test_key: TK_S10_SEND
+
+  - element_id: ct_tab_home
+    screen: S10
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: ct_tab_portfolio
+    screen: S10
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: ct_tab_quote
+    screen: S10
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: ct_tab_status
+    screen: S10
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: ct_tab_more
+    screen: S10
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 11 — About (/about) ---
+  - element_id: ab_open_maps
+    screen: S11
+    label: Open in Maps
+    type: external
+    action: maps_search
+    query: "Tiabella"
+    design_note: Design shows map imagery but no coordinates; use maps search intent with company name from screen.
+    test_key: TK_S11_MAPS
+
+  - element_id: ab_email
+    screen: S11
+    type: external
+    action: send_email
+    email: "info@tiabellavideo.co.uk"
+    test_key: TK_S11_EMAIL
+
+  - element_id: ab_website
+    screen: S11
+    type: external
+    action: open_url
+    url: "https://tiabellavideo.co.uk"
+    test_key: TK_S11_WEBSITE
+
+  - element_id: ab_tab_home
+    screen: S11
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: ab_tab_portfolio
+    screen: S11
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: ab_tab_quote
+    screen: S11
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: ab_tab_status
+    screen: S11
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: ab_tab_more
+    screen: S11
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 12 — Order Status (/orders/status) ---
+  - element_id: os_refresh
+    screen: S12
+    design_control: refresh-cw icon
+    type: local_state
+    action: refresh_static_sample
+    test_key: TK_S12_REFRESH
+
+  - element_id: os_tab_home
+    screen: S12
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: os_tab_portfolio
+    screen: S12
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: os_tab_quote
+    screen: S12
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: os_tab_status
+    screen: S12
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: os_tab_more
+    screen: S12
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 13 — Settings (/settings) ---
+  - element_id: st_notifications
+    screen: S13
+    label: Notifications
+    type: local_state
+    action: toggle_notifications
+    test_key: TK_S13_NOTIF_TOGGLE
+
+  - element_id: st_email_updates
+    screen: S13
+    label: Email Updates
+    type: local_state
+    action: toggle_email_updates
+    test_key: TK_S13_EMAIL_UPDATES_TOGGLE
+
+  - element_id: st_privacy_policy
+    screen: S13
+    label: Privacy Policy
+    type: external
+    action: open_url
+    # CRITICAL: launched URI must equal <PRIVACY_POLICY_URL> / PRIVACY_POLICY_URL exactly (no variants).
+    url: "https://tiabellavideo.co.uk/privacy-policy"
+    test_key: TK_S13_PRIVACY_POLICY
+
+  - element_id: st_legal_information
+    screen: S13
+    label: Legal Information
+    type: internal
+    destination: /legal
+    test_key: TK_S13_LEGAL
+
+  - element_id: st_sign_out
+    screen: S13
+    label: Sign Out
+    type: local_state
+    action: clear_local_session_navigate
+    post_navigation: /splash
+    test_key: TK_S13_SIGN_OUT
+
+  - element_id: st_tab_home
+    screen: S13
+    label: HOME
+    type: internal
+    destination: /dashboard
+    test_key: TK_TAB_HOME
+  - element_id: st_tab_portfolio
+    screen: S13
+    label: PORTFOLIO
+    type: internal
+    destination: /portfolio
+    test_key: TK_TAB_PORTFOLIO
+  - element_id: st_tab_quote
+    screen: S13
+    label: QUOTE
+    type: internal
+    destination: /quote
+    test_key: TK_TAB_QUOTE
+  - element_id: st_tab_status
+    screen: S13
+    label: STATUS
+    type: internal
+    destination: /orders/status
+    test_key: TK_TAB_STATUS
+  - element_id: st_tab_more
+    screen: S13
+    label: MORE
+    type: internal
+    destination: /settings
+    test_key: TK_TAB_MORE
+
+  # --- Screen 14 — Legal (/legal) ---
+  - element_id: lg_back
+    screen: S14
+    label: Settings
+    type: internal
+    destination: /settings
+    test_key: TK_S14_BACK

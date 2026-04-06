@@ -1,0 +1,39 @@
+# --- Repository hygiene (root) ---
+.DS_Store
+Thumbs.db
+*.log
+*.code-workspace
+.cursor/
+
+# Nested / legacy trees — not part of primary Flutter app (do not commit)
+apk_flutter_clean/
+
+# Node (optional ops scripts)
+node_modules/
+
+# --- Flutter / Dart under /app ---
+app/.dart_tool/
+app/.flutter-plugins
+app/.flutter-plugins-dependencies
+app/build/
+app/**/build/
+app/.packages
+
+# Android local & secrets
+app/android/.gradle/
+app/android/local.properties
+app/android/app/debug.keystore
+app/android/**/*.iml
+app/android/.idea/
+app/android/captures/
+
+# Tests: Play Store goldens regenerated in CI (keep README / manifest docs)
+app/test/screenshots/goldens/*.png
+
+# Coverage
+app/coverage/
+coverage/
+
+# IDE
+.idea/
+*.iml
