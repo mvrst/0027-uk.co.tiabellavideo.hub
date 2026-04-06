@@ -37,11 +37,14 @@ workflows:
       - name: QA context, write and verify Android local.properties
         script: |
           set -e
-          ROOT="$(pwd)"
+          BUILD_DIR="${CM_BUILD_DIR:-$(pwd)}"
+          cd "$BUILD_DIR"
           echo "=== qa_apk context ==="
+          echo "CM_BUILD_DIR=${CM_BUILD_DIR:-<unset>}"
+          echo "BUILD_DIR=$BUILD_DIR"
+          echo "pwd=$(pwd)"
           echo "current_branch: $(git rev-parse --abbrev-ref HEAD)"
           echo "current_commit: $(git rev-parse HEAD)"
-          echo "working_directory_repo_root: $ROOT"
           FLUTTER_BIN="$(command -v flutter)"
           test -n "$FLUTTER_BIN"
           test -x "$FLUTTER_BIN" || test -f "$FLUTTER_BIN"
@@ -49,9 +52,9 @@ workflows:
           test -f "$FLUTTER_ROOT/bin/flutter"
           SDK="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
           test -n "$SDK"
-          LP="$ROOT/app/android/local.properties"
+          LP="$BUILD_DIR/app/android/local.properties"
           printf 'sdk.dir=%s\nflutter.sdk=%s\n' "$SDK" "$FLUTTER_ROOT" > "$LP"
-          echo "wrote: $LP"
+          echo "local_properties_path: $LP"
           echo "--- local.properties ---"
           cat "$LP"
           echo "--- end local.properties ---"
@@ -63,28 +66,40 @@ workflows:
       - name: Flutter pub get
         script: |
           set -e
-          cd app
+          BUILD_DIR="${CM_BUILD_DIR:-$(pwd)}"
+          cd "$BUILD_DIR/app"
           flutter pub get
       - name: Gradle assembleRelease (APK, not AAB)
         script: |
           set -e
-          ROOT="$(pwd)"
-          cd app/android
+          BUILD_DIR="${CM_BUILD_DIR:-$(pwd)}"
+          ANDROID_DIR="$BUILD_DIR/app/android"
+          cd "$ANDROID_DIR"
+          echo "pwd=$(pwd)"
+          if [ -f ./gradlew ]; then
+            echo "gradlew_exists: yes ($ANDROID_DIR/gradlew)"
+          else
+            echo "gradlew_exists: no"
+            echo "Listing $ANDROID_DIR:" >&2
+            ls -la "$ANDROID_DIR" >&2 || true
+            exit 1
+          fi
           chmod +x ./gradlew
-          echo "exact_build_command: $(pwd)/./gradlew assembleRelease --no-daemon --stacktrace"
+          CMD="$ANDROID_DIR/gradlew assembleRelease --no-daemon --stacktrace"
+          echo "exact_gradle_command: $CMD"
           ./gradlew assembleRelease --no-daemon --stacktrace
       - name: Verify APK output and fail if missing
         script: |
           set -e
-          ROOT="$(pwd)"
-          APK_DIR="$ROOT/app/build/app/outputs/flutter-apk"
+          BUILD_DIR="${CM_BUILD_DIR:-$(pwd)}"
+          APK_DIR="$BUILD_DIR/app/build/app/outputs/flutter-apk"
           echo "expected_apk_directory: $APK_DIR"
           shopt -s nullglob
           apks=( "$APK_DIR"/*.apk )
           if [ "${#apks[@]}" -eq 0 ]; then
             echo "ERROR: No APK found under $APK_DIR" >&2
-            echo "Searching for any .apk under app/build (debug listing):" >&2
-            find "$ROOT/app/build" -name '*.apk' -print 2>/dev/null || true
+            echo "Searching for any .apk under $BUILD_DIR/app/build (debug listing):" >&2
+            find "$BUILD_DIR/app/build" -name '*.apk' -print 2>/dev/null || true
             exit 1
           fi
           for a in "${apks[@]}"; do
