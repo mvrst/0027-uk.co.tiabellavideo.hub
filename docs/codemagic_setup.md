@@ -40,7 +40,7 @@ Workflows are intended to be **started manually** from the Codemagic UI (pick wo
 | Workflow | Signing | Main output |
 |----------|---------|-------------|
 | `store_screenshots` | No | PNG goldens under `app/test/screenshots/goldens/` |
-| `qa_apk` | `0027_upload` | Signed **`app-release.apk`** under `app/build/app/outputs/apk/release/` (Gradle `assembleRelease`, not `flutter build apk`) |
+| `qa_apk` | `0027_upload` | Signed **`app-release.apk`** under `app/android/app/build/outputs/apk/release/` (Gradle `assembleRelease` from `app/android/`) |
 | `closed_release` | `0027_upload` | `app-release.aab` |
 | `open_release` | `0027_upload` | `app-release.aab` |
 | `production_release` | `0027_upload` | `app-release.aab` |

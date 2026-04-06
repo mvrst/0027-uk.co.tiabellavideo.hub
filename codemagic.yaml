@@ -92,15 +92,15 @@ workflows:
         script: |
           set -e
           BUILD_DIR="${CM_BUILD_DIR:-$(pwd)}"
-          # Gradle assembleRelease (Flutter :app) — same output tree as bundleRelease, apk/ not flutter-apk/
-          APK_DIR="$BUILD_DIR/app/build/app/outputs/apk/release"
+          # Direct Gradle from app/android — :app module outputs under app/android/app/build/...
+          APK_DIR="$BUILD_DIR/app/android/app/build/outputs/apk/release"
           echo "qa_apk_apk_verification_directory: $APK_DIR"
           shopt -s nullglob
           apks=( "$APK_DIR"/*.apk )
           if [ "${#apks[@]}" -eq 0 ]; then
             echo "ERROR: No APK found under $APK_DIR" >&2
-            echo "Searching for any .apk under $BUILD_DIR/app/build (debug listing):" >&2
-            find "$BUILD_DIR/app/build" -name '*.apk' -print 2>/dev/null || true
+            echo "Searching for any .apk under $BUILD_DIR/app/android/app/build (debug listing):" >&2
+            find "$BUILD_DIR/app/android/app/build" -name '*.apk' -print 2>/dev/null || true
             exit 1
           fi
           echo "found_apk_count: ${#apks[@]}"
@@ -109,7 +109,7 @@ workflows:
             echo "produced_apk_path: $a"
           done
     artifacts:
-      - app/build/app/outputs/apk/release/*.apk
+      - app/android/app/build/outputs/apk/release/*.apk
 
   closed_release:
     name: closed_release

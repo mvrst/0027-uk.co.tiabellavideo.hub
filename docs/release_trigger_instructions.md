@@ -31,8 +31,8 @@ You may start any workflow from **any** branch Codemagic allows; the table is **
 
 - **Screenshots:** Download the **Artifacts** archive; upload PNGs to Play Console **Phone screenshots**.
 - **QA APK:** Download **`app-release.apk`** from  
-  `app/build/app/outputs/apk/release/`  
-  Install on a device via `adb install` or sideload. Same signing as release builds (`0027_upload`). Does **not** replace AAB uploads to Play. (`qa_apk` uses **`./gradlew assembleRelease`**, so artifacts follow the **Gradle** `:app` APK layout, not `outputs/flutter-apk/`.)
+  `app/android/app/build/outputs/apk/release/`  
+  Install on a device via `adb install` or sideload. Same signing as release builds (`0027_upload`). Does **not** replace AAB uploads to Play. (`qa_apk` runs Gradle from **`app/android/`**; the `:app` module writes APKs under **`app/android/app/build/…`**, not `app/build/app/…`.)
 - **Releases:** Download **`app-release.aab`** from  
   `app/build/app/outputs/bundle/release/`  
   Upload the same artifact type to the matching Play track (Closed / Open / Production).  
@@ -43,8 +43,8 @@ You may start any workflow from **any** branch Codemagic allows; the table is **
 1. Print branch + commit + repo root; write `app/android/local.properties` with `sdk.dir` and **`flutter.sdk` verified** against `which flutter`
 2. `flutter pub get` (in `app/`)
 3. **`./gradlew assembleRelease`** from **`app/android/`** (working directory for Gradle is `app/android/`; wrapper is **`./gradlew`** only — not repo root)
-4. Fail the build if **no** `*.apk` exists under **`app/build/app/outputs/apk/release/`** (Gradle release APK output for the Flutter `:app` module)
-5. Artifact glob: **`app/build/app/outputs/apk/release/*.apk`**
+4. Fail the build if **no** `*.apk` exists under **`app/android/app/build/outputs/apk/release/`** (Android `:app` module when Gradle cwd is `app/android/`)
+5. Artifact glob: **`app/android/app/build/outputs/apk/release/*.apk`**
 
 ## What runs in release workflows (order)
 
