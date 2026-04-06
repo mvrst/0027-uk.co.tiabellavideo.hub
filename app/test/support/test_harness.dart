@@ -41,11 +41,13 @@ void unbindUrlLauncherMock() {
       .setMockMethodCallHandler(kUrlLauncherChannel, null);
 }
 
-/// Hub shell with the same theme/routes as production [HubApp], for widget tests.
-Widget hubTestShell({String? initialLocation}) {
+/// Hub shell with the same routes as production [HubApp], for widget tests.
+///
+/// Defaults to [AppTheme.light]; pass [theme] for goldens (e.g. [AppTheme.lightForGoldens]).
+Widget hubTestShell({String? initialLocation, ThemeData? theme}) {
   return MaterialApp.router(
     debugShowCheckedModeBanner: false,
-    theme: AppTheme.light,
+    theme: theme ?? AppTheme.light,
     routerConfig: createAppRouter(initialLocation: initialLocation),
   );
 }

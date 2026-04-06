@@ -1,0 +1,4 @@
+# Declares tags used by tests (avoids "tag was used but not declared" warnings).
+tags:
+  store-screenshots:
+  store_listing:

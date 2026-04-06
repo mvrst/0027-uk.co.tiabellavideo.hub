@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hub/app_state.dart';
 import 'package:hub/services/prefs_service.dart';
+import 'package:hub/theme/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../support/test_harness.dart';
@@ -23,7 +24,10 @@ Widget storeScreenshotApp({required String initialLocation}) {
       child: SizedBox.fromSize(
         size: kStoreScreenshotLogicalSize,
         child: ClipRect(
-          child: hubTestShell(initialLocation: initialLocation),
+          child: hubTestShell(
+            initialLocation: initialLocation,
+            theme: AppTheme.lightForGoldens,
+          ),
         ),
       ),
     ),
